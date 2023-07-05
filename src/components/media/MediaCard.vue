@@ -47,7 +47,12 @@ export default {
         <div>
             <img :src="flagPath" :alt="title" class="media-language">
         </div>
-        <p>{{ mediaVote }}</p>
+        <div class="py-2">
+            <i v-for="n in 5" :key="n">
+                <FontAwesomeIcon v-if="n <= mediaVote" icon="fas fa-star" />
+                <FontAwesomeIcon v-else icon="far fa-star" />
+            </i>
+        </div>
     </div>
 </template>
 
