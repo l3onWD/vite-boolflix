@@ -7,7 +7,14 @@ import { store } from '../data/store';
 
 
 export default {
-    data: () => store
+    data: () => store,
+
+    methods: {
+        getImageUrl(imageName) {
+            const url = new URL(`../assets/img/${imageName}.png`, import.meta.url);
+            return url.href;
+        }
+    }
 }
 </script>
 
@@ -21,7 +28,9 @@ export default {
             <li v-for="movie in movies" :key="movie.id">
                 <p>Titolo: {{ movie.title }}</p>
                 <p>Titolo Originale: {{ movie.originalTitle }}</p>
-                <p>Lingua: {{ movie.originalLanguage }}</p>
+                <div>
+                    <img :src="getImageUrl(movie.originalLanguage)" :alt="movie.title">
+                </div>
                 <p>Voto: {{ movie.voteAverage }}</p>
             </li>
         </ul>

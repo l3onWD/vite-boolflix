@@ -26,6 +26,7 @@ export default {
             const config = {
                 params: {
                     api_key: apiKey,
+                    language: 'it',
                     query: store.filters.nameFilter
                 }
             }
