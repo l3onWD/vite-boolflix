@@ -1,5 +1,20 @@
 <script>
+/* -----------------------------------------
+* RESOURCES
+-------------------------------------------*/
+/*** COMPONENTS ***/
+import { store } from '../data/store';
+import BaseSearchForm from './base/BaseSerachForm.vue';
+
+
 export default {
+    components: { BaseSearchForm },
+
+    methods: {
+        setNameFilter(term) {
+            store.filters.nameFilter = term;
+        }
+    }
 
 
 }
@@ -9,10 +24,8 @@ export default {
 <template>
     <header>
         <h1>BoolFlix</h1>
-        <div>
-            <input type="text">
-            <button>Cerca</button>
-        </div>
+
+        <BaseSearchForm @form-submit="setNameFilter" />
     </header>
 </template>
 
