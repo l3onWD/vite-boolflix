@@ -100,4 +100,10 @@ export default {
 </template>
 
 
-<style></style>
+<style lang="scss">
+/*** BOOTSTRAP ***/
+@use "bootstrap/scss/bootstrap.scss";
+
+/*** CUSTOM ***/
+@use './assets/scss/style.scss'
+</style>
