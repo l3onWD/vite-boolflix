@@ -52,6 +52,7 @@ export default {
                 <img :src="flagPath" :alt="title" class="media-language">
             </div>
 
+            <!-- Vote Stars -->
             <div class="py-2">
                 <i v-for="n in 5" :key="n">
                     <FontAwesomeIcon v-if="n <= mediaVote" icon="fas fa-star" />
