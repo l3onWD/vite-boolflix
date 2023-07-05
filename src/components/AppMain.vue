@@ -19,18 +19,34 @@ export default {
 <template>
     <main>
 
-        <p v-if="!movies.length && !series.length">Cerca un film o una serie TV per iniziare.</p>
+        <div class="container h-100 py-4">
 
-        <div v-else>
+            <!-- Intro Screen -->
+            <div v-if="!movies.length && !series.length" class="h-100 d-flex justify-content-center align-items-center">
+                <p>Cerca un film o una serie TV per iniziare.</p>
+            </div>
 
-            <MediaList title="Film" :mediaList="movies" />
+            <!-- Media Lists -->
+            <div v-else>
 
-            <MediaList title="Serie" :mediaList="series" />
+                <MediaList title="Film" :mediaList="movies" />
 
+                <MediaList title="Serie" :mediaList="series" />
+
+            </div>
         </div>
 
     </main>
 </template>
 
 
-<style></style>
+<style lang="scss" scoped>
+@use '@/assets/scss/vars' as *;
+
+main {
+    height: calc(100vh - $layout-top);
+
+    background-color: $col-dark;
+    overflow-y: auto;
+}
+</style>
