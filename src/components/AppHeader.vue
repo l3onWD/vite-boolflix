@@ -28,7 +28,7 @@ export default {
     <header>
         <h1>BoolFlix</h1>
 
-        <BaseSearchForm @form-submit="onNameFilterSubmit" />
+        <BaseSearchForm placeholder="Cerca per nome..." @form-submit="onNameFilterSubmit" />
     </header>
 </template>
 
