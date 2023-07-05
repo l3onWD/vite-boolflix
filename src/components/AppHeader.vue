@@ -13,9 +13,7 @@ export default {
 
     methods: {
         onNameFilterSubmit(term) {
-            store.filters.nameFilter = term;
-
-            this.$emit('name-filter-submit');
+            this.$emit('name-filter-submit', term);
         }
     }
 

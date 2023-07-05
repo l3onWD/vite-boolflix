@@ -47,6 +47,18 @@ export default {
                     });
                 })
                 .catch(err => console.error(err))
+        },
+
+
+        /*
+        * FILTERING
+        */
+
+        // Update name filter and fetch new results
+        searchMoviesByName(name) {
+            store.filters.nameFilter = name;
+
+            this.fetchMoviesDb('search/movie');
         }
     }
 
@@ -55,7 +67,7 @@ export default {
 
 
 <template>
-    <AppHeader @name-filter-submit="fetchMoviesDb('search/movie')" />
+    <AppHeader @name-filter-submit="searchMoviesByName" />
 
     <AppMain />
 </template>
