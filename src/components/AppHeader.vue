@@ -23,11 +23,29 @@ export default {
 
 <template>
     <header>
-        <h1>BoolFlix</h1>
 
-        <BaseSearchForm placeholder="Cerca per nome..." @form-submit="onNameFilterSubmit" />
+        <div class="container h-100 d-flex justify-content-between align-items-center">
+
+            <!-- Title -->
+            <h1 class="mb-0">BoolFlix</h1>
+
+            <!-- Name Filter -->
+            <BaseSearchForm placeholder="Cerca per nome..." @form-submit="onNameFilterSubmit" />
+
+        </div>
+
     </header>
 </template>
 
 
-<style></style>
+<style lang="scss">
+@use '@/assets/scss/vars' as *;
+
+
+header {
+    height: 80px;
+
+    color: $col-red;
+    background-color: #000;
+}
+</style>
