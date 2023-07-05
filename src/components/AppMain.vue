@@ -3,7 +3,7 @@
 * RESOURCES
 -------------------------------------------*/
 /*** COMPONENTS ***/
-import MediaList from './MediaList.vue';
+import MediaList from './media/MediaList.vue';
 
 /*** DATA ***/
 import { store } from '../data/store';

@@ -20,6 +20,7 @@ export default {
         * FETCHING
         */
 
+        //
         fetchApi(endpoint, callback) {
 
             const config = {
@@ -57,8 +58,7 @@ export default {
         fetchSeries(endpoint = 'search/tv') {
 
             this.fetchApi(endpoint, ({ data }) => {
-                // Get movies data
-                console.log(data);
+                // Get series data
                 store.series = data.results.map(serie => {
                     const { id, name, original_name, original_language, vote_average } = serie;
                     return {
