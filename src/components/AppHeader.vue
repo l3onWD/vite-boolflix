@@ -3,8 +3,7 @@
 * RESOURCES
 -------------------------------------------*/
 /*** COMPONENTS ***/
-import { store } from '../data/store';
-import BaseSearchForm from './base/BaseSerachForm.vue';
+import BaseSearchForm from '@/components/base/BaseSerachForm.vue';
 
 
 export default {

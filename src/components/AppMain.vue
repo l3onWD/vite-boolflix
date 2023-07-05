@@ -3,10 +3,10 @@
 * RESOURCES
 -------------------------------------------*/
 /*** COMPONENTS ***/
-import MediaList from './media/MediaList.vue';
+import MediaList from '@/components/media/MediaList.vue';
 
 /*** DATA ***/
-import { store } from '../data/store';
+import { store } from '@/data/store';
 
 
 export default {
