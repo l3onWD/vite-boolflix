@@ -9,10 +9,13 @@ import BaseSearchForm from './base/BaseSerachForm.vue';
 
 export default {
     components: { BaseSearchForm },
+    emits: ['name-filter-submit'],
 
     methods: {
-        setNameFilter(term) {
+        onNameFilterSubmit(term) {
             store.filters.nameFilter = term;
+
+            this.$emit('name-filter-submit');
         }
     }
 
@@ -25,7 +28,7 @@ export default {
     <header>
         <h1>BoolFlix</h1>
 
-        <BaseSearchForm @form-submit="setNameFilter" />
+        <BaseSearchForm @form-submit="onNameFilterSubmit" />
     </header>
 </template>
 
