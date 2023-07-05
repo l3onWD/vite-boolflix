@@ -23,6 +23,10 @@ export default {
 
         posterfullPosterPath() {
             return posterBasePath + posterSize + this.posterPath;
+        },
+
+        mediaVote() {
+            return Math.ceil(this.voteAverage * 5 / 10);
         }
     }
 
@@ -38,7 +42,7 @@ export default {
         <div>
             <img :src="flagPath" :alt="title">
         </div>
-        <p>Voto: {{ voteAverage }}</p>
+        <p>Voto: {{ mediaVote }}</p>
     </div>
 </template>
 
