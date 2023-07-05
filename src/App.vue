@@ -42,13 +42,14 @@ export default {
             this.fetchApi(endpoint, ({ data }) => {
                 // Get movies data
                 store.movies = data.results.map(movie => {
-                    const { id, title, original_title, original_language, vote_average } = movie;
+                    const { id, title, original_title, original_language, vote_average, poster_path } = movie;
                     return {
                         id,
                         title,
                         originalTitle: original_title,
                         originalLanguage: original_language,
-                        voteAverage: vote_average
+                        voteAverage: vote_average,
+                        posterPath: poster_path
                     };
                 });
             });
@@ -60,13 +61,14 @@ export default {
             this.fetchApi(endpoint, ({ data }) => {
                 // Get series data
                 store.series = data.results.map(serie => {
-                    const { id, name, original_name, original_language, vote_average } = serie;
+                    const { id, name, original_name, original_language, vote_average, poster_path } = serie;
                     return {
                         id,
                         title: name,
                         originalTitle: original_name,
                         originalLanguage: original_language,
-                        voteAverage: vote_average
+                        voteAverage: vote_average,
+                        posterPath: poster_path
                     };
                 });
             });
