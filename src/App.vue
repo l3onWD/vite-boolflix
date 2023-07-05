@@ -20,8 +20,7 @@ export default {
         * FETCHING
         */
 
-        // Fetch from TMDB Api
-        fetchMoviesDb(endpoint) {
+        fetchApi(endpoint, callback) {
 
             const config = {
                 params: {
@@ -32,21 +31,45 @@ export default {
             }
 
             axios.get(apiUri + endpoint, config)
-                .then(({ data }) => {
-
-                    // Get movies data
-                    store.movies = data.results.map(movie => {
-                        const { id, title, original_title, original_language, vote_average } = movie;
-                        return {
-                            id,
-                            title,
-                            originalTitle: original_title,
-                            originalLanguage: original_language,
-                            voteAverage: vote_average
-                        };
-                    });
-                })
+                .then(callback)
                 .catch(err => console.error(err))
+        },
+
+        // Fetch movies from TMDB Api
+        fetchMovies(endpoint = 'search/movie') {
+
+            this.fetchApi(endpoint, ({ data }) => {
+                // Get movies data
+                store.movies = data.results.map(movie => {
+                    const { id, title, original_title, original_language, vote_average } = movie;
+                    return {
+                        id,
+                        title,
+                        originalTitle: original_title,
+                        originalLanguage: original_language,
+                        voteAverage: vote_average
+                    };
+                });
+            });
+        },
+
+        // Fetch series from TMDB Api
+        fetchSeries(endpoint = 'search/tv') {
+
+            this.fetchApi(endpoint, ({ data }) => {
+                // Get movies data
+                console.log(data);
+                store.series = data.results.map(serie => {
+                    const { id, name, original_name, original_language, vote_average } = serie;
+                    return {
+                        id,
+                        title: name,
+                        originalTitle: original_name,
+                        originalLanguage: original_language,
+                        voteAverage: vote_average
+                    };
+                });
+            });
         },
 
 
@@ -58,7 +81,9 @@ export default {
         searchMoviesByName(name) {
             store.filters.nameFilter = name;
 
-            this.fetchMoviesDb('search/movie');
+            //this.fetchMovies();
+
+            this.fetchSeries();
         }
     }
 

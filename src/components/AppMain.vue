@@ -22,18 +22,35 @@ export default {
 <template>
     <main>
 
-        <p v-if="!movies.length">Cerca un film o una serie TV per iniziare.</p>
+        <p v-if="!movies.length && !series.length">Cerca un film o una serie TV per iniziare.</p>
 
-        <ul v-else>
-            <li v-for="movie in movies" :key="movie.id">
-                <p>Titolo: {{ movie.title }}</p>
-                <p>Titolo Originale: {{ movie.originalTitle }}</p>
-                <div>
-                    <img :src="getImageUrl(movie.originalLanguage)" :alt="movie.title">
-                </div>
-                <p>Voto: {{ movie.voteAverage }}</p>
-            </li>
-        </ul>
+        <div v-else>
+
+            <h2>Film</h2>
+            <ul>
+                <li v-for="movie in movies" :key="movie.id">
+                    <p>Titolo: {{ movie.title }}</p>
+                    <p>Titolo Originale: {{ movie.originalTitle }}</p>
+                    <div>
+                        <img :src="getImageUrl(movie.originalLanguage)" :alt="movie.title">
+                    </div>
+                    <p>Voto: {{ movie.voteAverage }}</p>
+                </li>
+            </ul>
+
+
+            <h2>Serie</h2>
+            <ul>
+                <li v-for="serie in series" :key="series.id">
+                    <p>Titolo: {{ serie.title }}</p>
+                    <p>Titolo Originale: {{ serie.originalTitle }}</p>
+                    <div>
+                        <img :src="getImageUrl(serie.originalLanguage)" :alt="serie.title">
+                    </div>
+                    <p>Voto: {{ serie.voteAverage }}</p>
+                </li>
+            </ul>
+        </div>
 
     </main>
 </template>
