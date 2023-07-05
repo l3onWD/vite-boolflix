@@ -81,7 +81,7 @@ export default {
         searchMoviesByName(name) {
             store.filters.nameFilter = name;
 
-            //this.fetchMovies();
+            this.fetchMovies();
 
             this.fetchSeries();
         }
