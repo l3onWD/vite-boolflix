@@ -36,30 +36,60 @@ export default {
 
 
 <template>
-    <!-- Poster -->
-    <a href="#">
-        <img v-if="posterPath" :src="posterfullPosterPath" :alt="title" class="img-fluid">
-    </a>
+    <div class="media-card">
 
-    <!-- Media Info -->
-    <div class="text-center">
-        <h3>{{ title }}</h3>
-        <p>({{ originalTitle }})</p>
-        <div>
-            <img :src="flagPath" :alt="title" class="media-language">
+        <!-- Poster -->
+        <img v-if="posterPath" :src="posterfullPosterPath" :alt="title" class="img-fluid">
+
+        <!-- Media Info -->
+        <div class="media-info">
+
+            <h3>{{ title }}</h3>
+
+            <p>({{ originalTitle }})</p>
+
+            <div>
+                <img :src="flagPath" :alt="title" class="media-language">
+            </div>
+
+            <div class="py-2">
+                <i v-for="n in 5" :key="n">
+                    <FontAwesomeIcon v-if="n <= mediaVote" icon="fas fa-star" />
+                    <FontAwesomeIcon v-else icon="far fa-star" />
+                </i>
+            </div>
+
         </div>
-        <div class="py-2">
-            <i v-for="n in 5" :key="n">
-                <FontAwesomeIcon v-if="n <= mediaVote" icon="fas fa-star" />
-                <FontAwesomeIcon v-else icon="far fa-star" />
-            </i>
-        </div>
+
+
     </div>
 </template>
 
 
-<style scoped>
-.media-language {
-    width: 50px;
+<style lang="scss" scoped>
+.media-card {
+    position: relative;
+
+    text-align: center;
+
+    .media-info {
+        padding: 1rem;
+        position: absolute;
+        inset: 0;
+
+        opacity: 0;
+        background-color: rgba($color: #000, $alpha: 0.9);
+
+        transition: opacity 0.5s;
+        overflow-y: auto;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .media-language {
+        width: 50px;
+    }
 }
 </style>
