@@ -32,7 +32,7 @@ export default {
 
 <template>
     <div>
-        <img :src="posterfullPosterPath" :alt="title">
+        <img v-if="posterPath" :src="posterfullPosterPath" :alt="title">
         <p>Titolo: {{ title }}</p>
         <p>Titolo Originale: {{ originalTitle }}</p>
         <div>
