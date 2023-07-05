@@ -7,9 +7,9 @@ export default {
         voteAverage: Number,
     },
 
-    methods: {
-        getImageUrl(imageName) {
-            const url = new URL(`../../assets/img/${imageName}.png`, import.meta.url);
+    computed: {
+        flagPath() {
+            const url = new URL(`../../assets/img/${this.originalLanguage}.png`, import.meta.url);
             return url.href;
         }
     }
@@ -20,10 +20,11 @@ export default {
 
 <template>
     <div>
+        <img src="" :alt="title">
         <p>Titolo: {{ title }}</p>
         <p>Titolo Originale: {{ originalTitle }}</p>
         <div>
-            <img :src="getImageUrl(originalLanguage)" :alt="title">
+            <img :src="flagPath" :alt="title">
         </div>
         <p>Voto: {{ voteAverage }}</p>
     </div>
