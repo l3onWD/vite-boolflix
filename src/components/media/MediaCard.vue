@@ -35,16 +35,25 @@ export default {
 
 
 <template>
-    <div>
-        <img v-if="posterPath" :src="posterfullPosterPath" :alt="title">
-        <p>Titolo: {{ title }}</p>
-        <p>Titolo Originale: {{ originalTitle }}</p>
+    <!-- Poster -->
+    <a href="#">
+        <img v-if="posterPath" :src="posterfullPosterPath" :alt="title" class="img-fluid">
+    </a>
+
+    <!-- Media Info -->
+    <div class="text-center">
+        <h3>{{ title }}</h3>
+        <p>({{ originalTitle }})</p>
         <div>
-            <img :src="flagPath" :alt="title">
+            <img :src="flagPath" :alt="title" class="media-language">
         </div>
-        <p>Voto: {{ mediaVote }}</p>
+        <p>{{ mediaVote }}</p>
     </div>
 </template>
 
 
-<style></style>
+<style scoped>
+.media-language {
+    width: 50px;
+}
+</style>

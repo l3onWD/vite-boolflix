@@ -18,7 +18,7 @@ export default {
 
         <div class="input-group">
             <input v-model.trim="searchedTerm" type="text" :placeholder="placeholder || 'Search...'" class="form-control">
-            <button class="btn btn-outline-secondary">Cerca</button>
+            <button class="btn btn-outline-danger">Cerca</button>
         </div>
 
     </form>
