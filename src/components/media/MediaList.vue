@@ -1,17 +1,17 @@
 <script>
+/* -----------------------------------------
+* RESOURCES
+-------------------------------------------*/
+/*** COMPONENTS ***/
+import MediaCard from '@/components/media/MediaCard.vue';
+
+
 export default {
+    components: { MediaCard },
     props: {
         title: String,
         mediaList: Array
-    },
-
-    methods: {
-        getImageUrl(imageName) {
-            const url = new URL(`../../assets/img/${imageName}.png`, import.meta.url);
-            return url.href;
-        }
     }
-
 }
 </script>
 
@@ -23,12 +23,7 @@ export default {
 
         <ul>
             <li v-for="media in mediaList" :key="media.id">
-                <p>Titolo: {{ media.title }}</p>
-                <p>Titolo Originale: {{ media.originalTitle }}</p>
-                <div>
-                    <img :src="getImageUrl(media.originalLanguage)" :alt="media.title">
-                </div>
-                <p>Voto: {{ media.voteAverage }}</p>
+                <MediaCard v-bind="media" />
             </li>
         </ul>
 
