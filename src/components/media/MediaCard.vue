@@ -8,6 +8,7 @@ import { posterBasePath, posterSize } from '@/data/';
 
 export default {
     props: {
+        id: Number,
         title: String,
         originalTitle: String,
         originalLanguage: String,
