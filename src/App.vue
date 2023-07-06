@@ -5,6 +5,7 @@
 /*** COMPONENTS ***/
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
+import AppLoader from './components/AppLoader.vue';
 
 /*** DATA ***/
 import axios from 'axios';
@@ -13,8 +14,13 @@ import { store } from './data/store';
 
 
 export default {
-    components: { AppHeader, AppMain },
+    components: { AppHeader, AppMain, AppLoader },
 
+    data() {
+        return {
+            loaders: 0
+        };
+    },
     computed: {
         apiConfig() {
             return {
@@ -32,7 +38,9 @@ export default {
         * FETCHING
         */
         // Fetch media data from an api and store the result in an object key (with predefined properties expected)
-        fetchMediaApi(endpoint, media, callback) {
+        fetchMediaApi(endpoint, media) {
+
+            this.loaders++;
 
             axios.get(api.uri + endpoint, this.apiConfig)
                 .then(({ data }) => {
@@ -54,6 +62,9 @@ export default {
 
                 })
                 .catch(err => console.error(err))
+                .then(() => {
+                    this.loaders--;
+                });
         },
 
 
@@ -86,6 +97,8 @@ export default {
     <AppHeader @name-filter-submit="searchMedia" />
 
     <AppMain />
+
+    <AppLoader v-if="loaders" />
 </template>
 
 
