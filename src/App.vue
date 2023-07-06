@@ -8,84 +8,65 @@ import AppMain from './components/AppMain.vue';
 
 /*** DATA ***/
 import axios from 'axios';
-import { apiKey, apiUri } from './data/';
+import { api } from './data/';
 import { store } from './data/store';
 
 
 export default {
     components: { AppHeader, AppMain },
 
+    computed: {
+        apiConfig() {
+            return {
+                params: {
+                    api_key: api.key,
+                    language: api.language,
+                    query: store.filters.nameFilter
+                }
+            };
+        }
+    },
+
     methods: {
         /*
         * FETCHING
         */
+        // 
+        fetchApi(endpoint, media) {
 
-        //
-        fetchApi(endpoint, callback) {
+            axios.get(api.uri + endpoint, this.apiConfig)
+                .then(({ data }) => {
+                    store[media] = data.results.map(item => {
 
-            const config = {
-                params: {
-                    api_key: apiKey,
-                    language: 'it',
-                    query: store.filters.nameFilter
-                }
-            }
+                        const { id, title, original_title, name, original_name, original_language, vote_average, poster_path } = item;
 
-            axios.get(apiUri + endpoint, config)
-                .then(callback)
+                        return {
+                            id,
+                            title: title || name,
+                            originalTitle: original_title || original_name,
+                            originalLanguage: original_language,
+                            voteAverage: vote_average,
+                            posterPath: poster_path
+                        };
+
+                    });
+
+                })
                 .catch(err => console.error(err))
-        },
-
-        // Fetch movies from TMDB Api
-        fetchMovies(endpoint = 'search/movie') {
-
-            this.fetchApi(endpoint, ({ data }) => {
-                // Get movies data
-                store.movies = data.results.map(movie => {
-                    const { id, title, original_title, original_language, vote_average, poster_path } = movie;
-                    return {
-                        id,
-                        title,
-                        originalTitle: original_title,
-                        originalLanguage: original_language,
-                        voteAverage: vote_average,
-                        posterPath: poster_path
-                    };
-                });
-            });
-        },
-
-        // Fetch series from TMDB Api
-        fetchSeries(endpoint = 'search/tv') {
-
-            this.fetchApi(endpoint, ({ data }) => {
-                // Get series data
-                store.series = data.results.map(serie => {
-                    const { id, name, original_name, original_language, vote_average, poster_path } = serie;
-                    return {
-                        id,
-                        title: name,
-                        originalTitle: original_name,
-                        originalLanguage: original_language,
-                        voteAverage: vote_average,
-                        posterPath: poster_path
-                    };
-                });
-            });
         },
 
 
         /*
         * FILTERING
         */
-
         // Update name filter and fetch new results
-        searchMoviesByName(name) {
-            store.filters.nameFilter = name;
+        searchMedia(title) {
 
-            this.fetchMovies();
+            store.filters.nameFilter = title;
 
-            this.fetchSeries();
+            this.fetchApi('search/movie', 'movies');
+            this.fetchApi('search/tv', 'series');
+
         }
     }
 
@@ -94,7 +75,7 @@ export default {
 
 
 <template>
-    <AppHeader @name-filter-submit="searchMoviesByName" />
+    <AppHeader @name-filter-submit="searchMedia" />
 
     <AppMain />
 </template>
