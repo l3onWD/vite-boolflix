@@ -6,10 +6,9 @@ const api = {
 
 const mediaSettings = {
     posterBasePath: 'https://image.tmdb.org/t/p/',
-    posterSize: 'w342'
+    posterSize: 'w342',
+    languageFlags: ['it', 'en']
 }
 
-const posterBasePath = 'https://image.tmdb.org/t/p/';
-const posterSize = 'w342';
 
 export { api, mediaSettings };
