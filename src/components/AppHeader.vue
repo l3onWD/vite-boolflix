@@ -14,9 +14,7 @@ export default {
     components: { BaseSearchForm, BaseSelectInput },
     emits: ['filter-submit'],
 
-    data() {
-        return store;
-    },
+    data: () => store,
 
     computed: {
         genreSelectOptions() {

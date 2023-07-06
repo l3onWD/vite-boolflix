@@ -11,7 +11,26 @@ import { store } from '@/data/store';
 
 export default {
     components: { MediaList },
-    data: () => store
+
+    data: () => store,
+
+    computed: {
+        filteredMovies() {
+
+            const genreFilter = store.filters.genreId;
+
+            if (!genreFilter) return store.movies;
+            return store.movies.filter(movie => movie.genreIds.includes(genreFilter));
+        },
+
+        filteredSeries() {
+
+            const genreFilter = store.filters.genreId;
+
+            if (!genreFilter) return store.series;
+            return store.series.filter(serie => serie.genreIds.includes(genreFilter));
+        }
+    }
 }
 </script>
 
@@ -29,9 +48,9 @@ export default {
             <!-- Media Lists -->
             <div v-else>
 
-                <MediaList title="Film" :mediaList="movies" />
+                <MediaList title="Film" :mediaList="filteredMovies" />
 
-                <MediaList title="Serie" :mediaList="series" />
+                <MediaList title="Serie" :mediaList="filteredSeries" />
 
             </div>
         </div>
