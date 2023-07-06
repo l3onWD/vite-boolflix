@@ -45,11 +45,11 @@ export default {
 
 
 <template>
-    <div class="media-card h-100">
+    <div class="media-card">
 
         <!-- Poster -->
-        <img v-if="hasPoster" :src="posterfullPosterPath" :alt="title" class="img-fluid">
-        <div v-else class="poster-placeholder">
+        <img v-if="hasPoster" :src="posterfullPosterPath" :alt="title" class="media-poster">
+        <div v-else class="media-poster-none">
             <h3>Nessuna Immagine</h3>
         </div>
 
@@ -84,11 +84,24 @@ export default {
 
 
 .media-card {
+    height: 100%;
+    min-height: 300px;
     position: relative;
 
+    border-radius: 0.5rem;
     text-align: center;
 
-    .poster-placeholder {
+    overflow: hidden;
+    box-shadow: 0 0 8px 2px rgba($color: #000, $alpha: 0.5);
+
+    .media-poster {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+    }
+
+    .media-poster-none {
         height: 100%;
 
         display: flex;
