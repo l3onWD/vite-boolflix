@@ -21,7 +21,9 @@ export default {
         <div class="input-group">
             <input v-model.trim="searchedTerm" @keyup="$emit('term-changed', searchedTerm)" type="text"
                 :placeholder="placeholder || 'Search...'" class="form-control">
-            <button class="btn btn-outline-danger">Cerca</button>
+            <button class="btn btn-outline-danger">
+                <FontAwesomeIcon icon="fas fa-search" />
+            </button>
         </div>
 
     </form>
