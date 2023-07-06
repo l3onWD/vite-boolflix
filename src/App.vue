@@ -31,13 +31,14 @@ export default {
         /*
         * FETCHING
         */
-        // 
-        fetchApi(endpoint, media) {
+        // Fetch media data from an api and store the result in an object key (with predefined properties expected)
+        fetchMediaApi(endpoint, media, callback) {
 
             axios.get(api.uri + endpoint, this.apiConfig)
                 .then(({ data }) => {
                     store[media] = data.results.map(item => {
 
+                        // Expected properties (API dependent)
                         const { id, title, original_title, name, original_name, original_language, vote_average, poster_path } = item;
 
                         return {
@@ -64,8 +65,8 @@ export default {
 
             store.filters.nameFilter = title;
 
-            this.fetchApi('search/movie', 'movies');
-            this.fetchApi('search/tv', 'series');
+            this.fetchMediaApi('search/movie', 'movies');
+            this.fetchMediaApi('search/tv', 'series');
 
         }
     }
