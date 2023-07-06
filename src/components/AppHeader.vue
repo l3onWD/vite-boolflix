@@ -23,10 +23,11 @@ export default {
     },
 
     methods: {
-        onTitleFilterSubmit(title) {
-
+        onTitleFilterChanged(title) {
             store.filters.title = title;
+        },
 
+        onTitleFilterSubmit() {
             this.$emit('filter-submit');
         },
 
@@ -61,7 +62,8 @@ export default {
                     @select-changed="onGenresFilterChanged" class="me-2" />
 
                 <!-- Title Filter -->
-                <BaseSearchForm placeholder="Cerca per nome..." @form-submit="onTitleFilterSubmit" />
+                <BaseSearchForm placeholder="Cerca per nome..." @term-changed="onTitleFilterChanged"
+                    @form-submit="onTitleFilterSubmit" />
             </div>
 
         </div>
