@@ -67,18 +67,20 @@ export default {
 
                     this.loaders--;
 
-                    this.fetchMediaCredits(media);
+                    this.fetchMediaCast(media);
                 });
         },
 
-        //
-        fetchMediaCredits(media) {
+        // Fetch a list of 5 cast actors for all items in a media array
+        fetchMediaCast(media) {
             store[media].forEach((item, i) => {
 
                 // Get endpoint based on media fetched
                 const creditsEndpoint = media === 'movies' ? `movie/${item.id}/credits` : `tv/${item.id}/credits`;
 
-                // Fetch credits
+                // Fetch cast
+                this.loaders++;
+
                 axios.get(api.uri + creditsEndpoint, this.apiConfig)
                     .then(({ data }) => {
 
@@ -87,7 +89,10 @@ export default {
                         store[media][i].cast = castList;
 
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => console.error(err))
+                    .then(() => {
+                        this.loaders--;
+                    });
 
             });
         },
