@@ -100,7 +100,7 @@ export default {
             });
         },
 
-        //
+        // Fetch all unique genres from movies and series media
         fetchMediaGenres() {
 
             // Fetch movie Genres
@@ -110,7 +110,6 @@ export default {
                 .then(({ data }) => {
 
                     store.genres = data.genres;// Save results
-
 
                     // Fetch tv Genres
                     this.loaders++;

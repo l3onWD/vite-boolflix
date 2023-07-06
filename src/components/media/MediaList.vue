@@ -8,6 +8,7 @@ import MediaCard from '@/components/media/MediaCard.vue';
 
 export default {
     components: { MediaCard },
+
     props: {
         title: String,
         mediaList: Array
@@ -29,6 +30,3 @@ export default {
 
     </section>
 </template>
-
-
-<style></style>

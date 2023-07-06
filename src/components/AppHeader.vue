@@ -12,7 +12,6 @@ import { store } from '@/data/store';
 
 export default {
     components: { BaseSearchForm, BaseSelectInput },
-    emits: ['filter-submit'],
 
     data: () => store,
 
@@ -36,8 +35,9 @@ export default {
 
             this.$emit('filter-submit');
         }
-    }
+    },
 
+    emits: ['filter-submit']
 
 }
 </script>

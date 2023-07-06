@@ -5,9 +5,11 @@ export default {
             searchedTerm: ''
         };
     },
+
     props: {
         placeholder: String
     },
+
     emits: ['form-submit', 'term-changed']
 }
 </script>
@@ -24,6 +26,3 @@ export default {
 
     </form>
 </template>
-
-
-<style></style>
