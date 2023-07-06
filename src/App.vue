@@ -56,6 +56,8 @@ export default {
                             originalLanguage: original_language,
                             voteAverage: vote_average,
                             posterPath: poster_path,
+
+                            // Create properties for next api calls
                             cast: []
                         };
 
@@ -97,6 +99,41 @@ export default {
             });
         },
 
+        //
+        fetchMediaGenres() {
+
+            // Fetch movie Genres
+            this.loaders++;
+
+            axios.get(api.uri + 'genre/movie/list', this.apiConfig)
+                .then(({ data }) => {
+
+                    store.genres = data.genres;// Save results
+
+
+                    // Fetch tv Genres
+                    this.loaders++;
+
+                    axios.get(api.uri + 'genre/tv/list', this.apiConfig)
+                        .then(({ data }) => {
+
+                            // Filter fetched tv genres
+                            const newgenres = data.genres.filter(({ id }) => !store.genres.some(actualGenre => actualGenre.id === id));
+
+                            // Update store
+                            store.genres.push(...newgenres);
+
+                        }).catch(err => console.error(err))
+                        .then(() => {
+                            this.loaders--;
+                        });
+                })
+                .catch(err => console.error(err))
+                .then(() => {
+                    this.loaders--;
+                });
+        },
+
 
         /*
         * FILTERING
@@ -117,6 +154,11 @@ export default {
             this.fetchMediaApi('search/movie', 'movies');
             this.fetchMediaApi('search/tv', 'series');
         }
+    },
+
+    created() {
+
+        this.fetchMediaGenres();
     }
 
 }
