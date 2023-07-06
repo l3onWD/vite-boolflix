@@ -13,7 +13,8 @@ export default {
         originalTitle: String,
         originalLanguage: String,
         voteAverage: Number,
-        posterPath: String
+        posterPath: String,
+        cast: Array
     },
 
     computed: {
@@ -37,6 +38,10 @@ export default {
 
         mediaVote() {
             return Math.ceil(this.voteAverage * 5 / 10);
+        },
+
+        castList() {
+            return this.cast.join(', ');
         }
     }
 
@@ -71,6 +76,13 @@ export default {
                     <FontAwesomeIcon v-else icon="far fa-star" />
                 </i>
             </div>
+
+            <!-- Cast -->
+            <div class="py-2">
+                <p class="mb-0">Cast:</p>
+                <p>{{ castList }}...</p>
+            </div>
+
 
         </div>
 

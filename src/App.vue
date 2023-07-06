@@ -55,7 +55,8 @@ export default {
                             originalTitle: original_title || original_name,
                             originalLanguage: original_language,
                             voteAverage: vote_average,
-                            posterPath: poster_path
+                            posterPath: poster_path,
+                            cast: []
                         };
 
                     });
@@ -63,8 +64,32 @@ export default {
                 })
                 .catch(err => console.error(err))
                 .then(() => {
+
                     this.loaders--;
+
+                    this.fetchMediaCredits(media);
                 });
+        },
+
+        //
+        fetchMediaCredits(media) {
+            store[media].forEach((item, i) => {
+
+                // Get endpoint based on media fetched
+                const creditsEndpoint = media === 'movies' ? `movie/${item.id}/credits` : `tv/${item.id}/credits`;
+
+                // Fetch credits
+                axios.get(api.uri + creditsEndpoint, this.apiConfig)
+                    .then(({ data }) => {
+
+                        const castList = data.cast.slice(0, 5).map(actor => actor.name);
+
+                        store[media][i].cast = castList;
+
+                    })
+                    .catch(err => console.error(err));
+
+            });
         },
 
 
