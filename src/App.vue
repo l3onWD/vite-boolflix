@@ -65,6 +65,14 @@ export default {
 
             store.filters.title = title;
 
+            // Reset if title is emty without fetching
+            if (!title) {
+                store.movies = [];
+                store.series = [];
+                return
+            }
+
+            // Fetch all media
             this.fetchMediaApi('search/movie', 'movies');
             this.fetchMediaApi('search/tv', 'series');
         }
