@@ -3,7 +3,7 @@
 * RESOURCES
 -------------------------------------------*/
 /*** DATA ***/
-import { posterBasePath, posterSize } from '@/data/';
+import { mediaSettings } from '@/data/';
 
 
 export default {
@@ -17,13 +17,22 @@ export default {
     },
 
     computed: {
+        hasFlag() {
+            return mediaSettings.languageFlags.includes(this.originalLanguage);
+        },
+
         flagPath() {
             const url = new URL(`../../assets/img/${this.originalLanguage}.png`, import.meta.url);
             return url.href;
         },
 
+        hasPoster() {
+            return this.posterPath;
+        },
+
         posterfullPosterPath() {
-            return posterBasePath + posterSize + this.posterPath;
+            const { posterBasePath, posterSize } = mediaSettings
+            return posterBasePath + posterSize + this.posterPath;;
         },
 
         mediaVote() {
@@ -36,10 +45,13 @@ export default {
 
 
 <template>
-    <div class="media-card">
+    <div class="media-card h-100">
 
         <!-- Poster -->
-        <img v-if="posterPath" :src="posterfullPosterPath" :alt="title" class="img-fluid">
+        <img v-if="hasPoster" :src="posterfullPosterPath" :alt="title" class="img-fluid">
+        <div v-else class="poster-placeholder">
+            <h3>Nessuna Immagine</h3>
+        </div>
 
         <!-- Media Info -->
         <div class="media-info">
@@ -48,9 +60,9 @@ export default {
 
             <p>({{ originalTitle }})</p>
 
-            <div>
-                <img :src="flagPath" :alt="title" class="media-language">
-            </div>
+            <!-- Language flag -->
+            <img v-if="hasFlag" :src="flagPath" :alt="originalLanguage" class="media-language">
+            <p v-else>Lingua originale: [{{ originalLanguage }}]</p>
 
             <!-- Vote Stars -->
             <div class="py-2">
@@ -68,10 +80,24 @@ export default {
 
 
 <style lang="scss" scoped>
+@use '@/assets/scss/vars' as *;
+
+
 .media-card {
     position: relative;
 
     text-align: center;
+
+    .poster-placeholder {
+        height: 100%;
+
+        display: flex;
+        background-color: $col-gray;
+
+        &>* {
+            margin: auto;
+        }
+    }
 
     .media-info {
         padding: 1rem;
