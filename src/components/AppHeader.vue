@@ -8,11 +8,11 @@ import BaseSearchForm from '@/components/base/BaseSerachForm.vue';
 
 export default {
     components: { BaseSearchForm },
-    emits: ['name-filter-submit'],
+    emits: ['title-filter-submit'],
 
     methods: {
-        onNameFilterSubmit(term) {
-            this.$emit('name-filter-submit', term);
+        onTitleFilterSubmit(title) {
+            this.$emit('title-filter-submit', title);
         }
     }
 
@@ -27,10 +27,14 @@ export default {
         <div class="container h-100 d-flex justify-content-between align-items-center">
 
             <!-- Title -->
-            <h1 class="mb-0">BoolFlix</h1>
+            <h1 class="mb-0">
+                <span class="display-1 fw-bold d-sm-none">[BF]</span>
+                <span class="d-none d-sm-inline">BoolFlix</span>
+            </h1>
+
 
             <!-- Name Filter -->
-            <BaseSearchForm placeholder="Cerca per nome..." @form-submit="onNameFilterSubmit" />
+            <BaseSearchForm placeholder="Cerca per nome..." @form-submit="onTitleFilterSubmit" />
 
         </div>
 

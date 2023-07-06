@@ -94,7 +94,7 @@ export default {
 
 
 <template>
-    <AppHeader @name-filter-submit="searchMedia" />
+    <AppHeader @title-filter-submit="searchMedia" />
 
     <AppMain />
 

@@ -24,6 +24,7 @@ div {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.7);
 
+    /* TODO needed cause bootstrap input group */
     z-index: 2;
 }
 </style>
