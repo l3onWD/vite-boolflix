@@ -3,16 +3,39 @@
 * RESOURCES
 -------------------------------------------*/
 /*** COMPONENTS ***/
-import BaseSearchForm from '@/components/base/BaseSerachForm.vue';
+import BaseSearchForm from '@/components/base/BaseSearchForm.vue';
+import BaseSelectInput from '@/components/base/BaseSelectInput.vue';
+
+/*** DATA ***/
+import { store } from '@/data/store';
 
 
 export default {
-    components: { BaseSearchForm },
-    emits: ['title-filter-submit'],
+    components: { BaseSearchForm, BaseSelectInput },
+    emits: ['filter-submit'],
+
+    data() {
+        return store;
+    },
+
+    computed: {
+        genreSelectOptions() {
+            return store.genres.map(({ id, name }) => ({ value: id, text: name }));
+        }
+    },
 
     methods: {
         onTitleFilterSubmit(title) {
-            this.$emit('title-filter-submit', title);
+
+            store.filters.title = title;
+
+            this.$emit('filter-submit');
+        },
+
+        onGenresFilterChanged(genreId) {
+            store.filters.genreId = genreId;
+
+            this.$emit('filter-submit');
         }
     }
 
@@ -33,8 +56,15 @@ export default {
             </h1>
 
 
-            <!-- Name Filter -->
-            <BaseSearchForm placeholder="Cerca per nome..." @form-submit="onTitleFilterSubmit" />
+            <!-- Filters -->
+            <div class="d-flex">
+                <!-- Genres Filter -->
+                <BaseSelectInput defaultLabel="Tutti i generi" :options="genreSelectOptions"
+                    @select-changed="onGenresFilterChanged" class="me-2" />
+
+                <!-- Title Filter -->
+                <BaseSearchForm placeholder="Cerca per nome..." @form-submit="onTitleFilterSubmit" />
+            </div>
 
         </div>
 

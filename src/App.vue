@@ -139,13 +139,11 @@ export default {
         /*
         * FILTERING
         */
-        // Update name filter and fetch new results
-        searchMedia(title) {
-
-            store.filters.title = title;
+        //Fetch new results
+        searchMedia() {
 
             // Reset if title is emty without fetching
-            if (!title) {
+            if (!store.filters.title) {
                 store.movies = [];
                 store.series = [];
                 return
@@ -167,7 +165,7 @@ export default {
 
 
 <template>
-    <AppHeader @title-filter-submit="searchMedia" />
+    <AppHeader @filter-submit="searchMedia" />
 
     <AppMain />
 
