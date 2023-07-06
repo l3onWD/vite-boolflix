@@ -4,6 +4,7 @@
 -------------------------------------------*/
 /*** DATA ***/
 import { mediaSettings } from '@/data/';
+import { store } from '@/data/store';
 
 
 export default {
@@ -14,7 +15,8 @@ export default {
         originalLanguage: String,
         voteAverage: Number,
         posterPath: String,
-        cast: Array
+        cast: Array,
+        genreIds: Array
     },
 
     computed: {
@@ -42,6 +44,17 @@ export default {
 
         castList() {
             return this.cast.join(', ');
+        },
+
+        genresList() {
+
+            if (!this.genreIds.length) return '-';
+
+            const genreNames = this.genreIds.map(genreId => {
+                return store.genres.find(({ id }) => id === genreId).name;
+            });
+
+            return genreNames.join(', ');
         }
     }
 
@@ -61,9 +74,15 @@ export default {
         <!-- Media Info -->
         <div class="media-info">
 
+            <!-- Title -->
             <h3>{{ title }}</h3>
-
             <p>({{ originalTitle }})</p>
+
+            <!-- Generes -->
+            <div class="py-2">
+                <p class="mb-0">Generi:</p>
+                <p>{{ genresList }}</p>
+            </div>
 
             <!-- Language flag -->
             <img v-if="hasFlag" :src="flagPath" :alt="originalLanguage" class="media-language">

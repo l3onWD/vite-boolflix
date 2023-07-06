@@ -47,7 +47,7 @@ export default {
                     store[media] = data.results.map(item => {
 
                         // Expected properties (API dependent)
-                        const { id, title, original_title, name, original_name, original_language, vote_average, poster_path } = item;
+                        const { id, title, original_title, name, original_name, original_language, vote_average, poster_path, genre_ids } = item;
 
                         return {
                             id,
@@ -56,6 +56,7 @@ export default {
                             originalLanguage: original_language,
                             voteAverage: vote_average,
                             posterPath: poster_path,
+                            genreIds: genre_ids,
 
                             // Create properties for next api calls
                             cast: []
