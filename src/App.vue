@@ -21,7 +21,7 @@ export default {
                 params: {
                     api_key: api.key,
                     language: api.language,
-                    query: store.filters.nameFilter
+                    query: store.filters.title
                 }
             };
         }
@@ -63,11 +63,10 @@ export default {
         // Update name filter and fetch new results
         searchMedia(title) {
 
-            store.filters.nameFilter = title;
+            store.filters.title = title;
 
             this.fetchMediaApi('search/movie', 'movies');
             this.fetchMediaApi('search/tv', 'series');
-
         }
     }
 
@@ -83,9 +82,5 @@ export default {
 
 
 <style lang="scss">
-/*** BOOTSTRAP ***/
-@use "bootstrap/scss/bootstrap.scss";
-
-/*** CUSTOM ***/
 @use './assets/scss/style.scss'
 </style>
