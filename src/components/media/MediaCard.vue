@@ -30,6 +30,7 @@ export default {
         voteAverage: Number,
         posterPath: String,
         genreIds: Array,
+        releaseDate: String
     },
 
     computed: {
@@ -86,6 +87,10 @@ export default {
             });
 
             return genreNames.join(', ');
+        },
+
+        releaseYear() {
+            return new Date(this.releaseDate).getFullYear();
         }
     },
 
@@ -141,22 +146,30 @@ export default {
 
             <!-- Generes -->
             <div class="py-2">
-                <p class="mb-0">Generi:</p>
+                <h5 class="mb-0">Generi</h5>
                 <p>{{ genresList }}</p>
             </div>
 
+            <!-- Release Year -->
+            <h5 class="mb-0">Anno</h5>
+            <p>{{ releaseYear }}</p>
+
             <!-- Language flag -->
-            <img v-if="hasFlag" :src="flagPath" :alt="originalLanguage" class="media-language">
-            <p v-else>Lingua originale: [{{ originalLanguage }}]</p>
+            <div class="py-2">
+                <h5 class="mb-2">Lingua Originale</h5>
+                <img v-if="hasFlag" :src="flagPath" :alt="originalLanguage" class="media-language">
+                <p v-else>[{{ originalLanguage }}]</p>
+            </div>
 
             <!-- Vote Stars -->
             <div class="py-2">
+                <h5 class="mb-0">Voto</h5>
                 <FontAwesomeIcon v-for="n in 5" :key="n" :icon="[getIconClass(n), 'star']" />
             </div>
 
             <!-- Cast -->
             <div class="py-2">
-                <p class="mb-0">Cast:</p>
+                <h5 class="mb-0">Cast</h5>
                 <p>{{ castList }}...</p>
             </div>
 

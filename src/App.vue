@@ -47,7 +47,15 @@ export default {
                     store[media] = data.results.map(item => {
 
                         // Expected properties (API dependent)
-                        const { id, title, original_title, name, original_name, original_language, vote_average, poster_path, genre_ids } = item;
+                        const {
+                            id,
+                            title, original_title,
+                            name, original_name, original_language,
+                            vote_average,
+                            poster_path,
+                            genre_ids,
+                            release_date, first_air_date
+                        } = item;
 
 
                         return {
@@ -58,6 +66,7 @@ export default {
                             voteAverage: vote_average,
                             posterPath: poster_path,
                             genreIds: genre_ids,
+                            releaseDate: release_date || first_air_date,
 
                             type: media
                         };
