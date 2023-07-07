@@ -7,8 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 // Add icons
 import { faStar as faRegularStar } from '@fortawesome/free-regular-svg-icons';
-import { faStar as faSolidStar, faSpinner, faSearch } from '@fortawesome/free-solid-svg-icons';
-library.add(faRegularStar, faSolidStar, faSpinner, faSearch);
+import { faStar as faSolidStar, faSpinner, faSearch, faSliders } from '@fortawesome/free-solid-svg-icons';
+library.add(faRegularStar, faSolidStar, faSpinner, faSearch, faSliders);
 
 
 createApp(App)

@@ -22,6 +22,10 @@ export default {
     computed: {
         genreSelectOptions() {
             return store.genres.map(({ id, name }) => ({ value: id, text: name }));
+        },
+
+        isFilterSelected() {
+            return store.filters.genreId;
         }
     },
 
@@ -44,7 +48,10 @@ export default {
     <div class="d-flex justify-content-end">
 
         <!-- Filters Toggler -->
-        <button @click="filtersAreVisible = !filtersAreVisible" class="btn btn-outline-light">Filtri</button>
+        <button @click="filtersAreVisible = !filtersAreVisible" class="btn btn-outline-light">
+            <FontAwesomeIcon icon="fas fa-sliders" size="lg" class="me-2" :class="{ 'text-success': isFilterSelected }" />
+            Filtri
+        </button>
 
         <!-- Filters Container -->
         <BaseSidecanvas :isActive="filtersAreVisible" title="Filtri" position="right"
