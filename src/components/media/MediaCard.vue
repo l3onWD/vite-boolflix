@@ -2,6 +2,9 @@
 /* -----------------------------------------
 * RESOURCES
 -------------------------------------------*/
+/*** COMPONENTS ***/
+import AppLoader from '@/components/AppLoader.vue';
+
 /*** DATA ***/
 import axios from 'axios';
 import { api, mediaSettings } from '@/data/';
@@ -9,9 +12,12 @@ import { store } from '@/data/store';
 
 
 export default {
+    components: { AppLoader },
+
     data() {
         return {
-            cast: []
+            cast: [],
+            loaders: 0
         };
     },
 
@@ -90,7 +96,7 @@ export default {
         // Fetch a list of 5 cast actors
         fetchMediaCast(endpoint) {
 
-            //this.loaders++;
+            this.loaders++;
 
             axios.get(api.uri + endpoint, this.apiConfig)
                 .then(({ data }) => {
@@ -100,7 +106,7 @@ export default {
                 })
                 .catch(err => console.error(err))
                 .then(() => {
-                    //this.loaders--;
+                    this.loaders--;
                 });
 
         },
@@ -156,6 +162,8 @@ export default {
 
 
         </div>
+
+        <AppLoader v-if="loaders" />
 
 
     </div>

@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
 div {
-    position: fixed;
+    position: absolute;
     inset: 0;
 
     display: flex;
