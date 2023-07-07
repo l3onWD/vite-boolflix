@@ -23,7 +23,9 @@ export default {
             <!-- Header -->
             <div class="sidecanvas-header mb-3">
                 <h2 class="mb-0">{{ title }}</h2>
-                <button @click="$emit('canvas-closed')" class="btn-close btn-close-white"></button>
+                <button @click="$emit('canvas-closed')" class="btn text-light">
+                    <FontAwesomeIcon icon="fas fa-close" size="xl" />
+                </button>
             </div>
 
             <!-- External Content -->
