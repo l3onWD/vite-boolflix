@@ -6,31 +6,13 @@
 import MediaSection from '@/components/media/MediaSection.vue';
 
 /*** DATA ***/
-import { store } from '@/data/store';
+import { store } from '@/data/store';// TODO eliminare la dipendenza da store e riscrivere logica schermata iniziale
 
 
 export default {
     components: { MediaSection },
 
-    data: () => store,
-
-    computed: {
-        filteredMovies() {
-
-            const genreFilter = store.filters.genreId;
-
-            if (!genreFilter) return store.movies;
-            return store.movies.filter(movie => movie.genreIds.includes(genreFilter));
-        },
-
-        filteredSeries() {
-
-            const genreFilter = store.filters.genreId;
-
-            if (!genreFilter) return store.series;
-            return store.series.filter(serie => serie.genreIds.includes(genreFilter));
-        }
-    }
+    data: () => store
 }
 </script>
 
@@ -48,9 +30,9 @@ export default {
             <!-- Media Lists -->
             <div v-else>
 
-                <MediaSection title="Film" :mediaList="filteredMovies" />
+                <MediaSection title="Film" media-type="movies" />
 
-                <MediaSection title="Serie" :mediaList="filteredSeries" />
+                <MediaSection title="Serie" media-type="series" />
 
             </div>
         </div>

@@ -5,14 +5,29 @@
 /*** COMPONENTS ***/
 import MediaCard from '@/components/media/MediaCard.vue';
 
+/*** DATA ***/
+import { store } from '@/data/store';
+
 
 export default {
     components: { MediaCard },
 
     props: {
         title: String,
-        mediaList: Array
+        mediaType: String
+    },
+
+    computed: {
+
+        filteredMedia() {
+
+            const genreFilter = store.filters.genreId;
+
+            if (!genreFilter) return store[this.mediaType];
+            return store[this.mediaType].filter(media => media.genreIds.includes(genreFilter));
+        }
     }
+
 }
 </script>
 
@@ -23,7 +38,7 @@ export default {
         <h2>{{ title }}</h2>
 
         <ul class="row g-4 row-cols-2 row-cols-md-3 row-cols-lg-4">
-            <li v-for="media in mediaList" :key="media.id" class="col">
+            <li v-for="media in filteredMedia" :key="media.id" class="col">
                 <MediaCard v-bind="media" />
             </li>
         </ul>
