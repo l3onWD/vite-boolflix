@@ -3,14 +3,14 @@
 * RESOURCES
 -------------------------------------------*/
 /*** COMPONENTS ***/
-import MediaList from '@/components/media/MediaList.vue';
+import MediaSection from '@/components/media/MediaSection.vue';
 
 /*** DATA ***/
 import { store } from '@/data/store';
 
 
 export default {
-    components: { MediaList },
+    components: { MediaSection },
 
     data: () => store,
 
@@ -48,9 +48,9 @@ export default {
             <!-- Media Lists -->
             <div v-else>
 
-                <MediaList title="Film" :mediaList="filteredMovies" />
+                <MediaSection title="Film" :mediaList="filteredMovies" />
 
-                <MediaList title="Serie" :mediaList="filteredSeries" />
+                <MediaSection title="Serie" :mediaList="filteredSeries" />
 
             </div>
         </div>
