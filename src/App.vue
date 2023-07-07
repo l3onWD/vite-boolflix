@@ -138,7 +138,7 @@ export default {
 <template>
     <AppHeader @filter-submit="searchMedia" />
 
-    <AppMain />
+    <AppMain @filter-submit="searchMedia" />
 
     <AppLoader v-if="loaders" />
 </template>
