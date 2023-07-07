@@ -7,6 +7,7 @@ const api = {
 const mediaSettings = {
     posterBasePath: 'https://image.tmdb.org/t/p/',
     posterSize: 'w342',
+    posterPlaceholder: './src/assets/img/media-placeholder.png',//TODO usare immagine da internet
     languageFlags: ['it', 'en']
 }
 

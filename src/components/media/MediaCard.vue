@@ -29,13 +29,10 @@ export default {
             return url.href;
         },
 
-        hasPoster() {
-            return this.posterPath;
-        },
-
         posterFullPath() {
-            if (!this.posterPath) return null;
-            const { posterBasePath, posterSize } = mediaSettings
+            const { posterBasePath, posterSize, posterPlaceholder } = mediaSettings;
+
+            if (!this.posterPath) return posterPlaceholder;
             return posterBasePath + posterSize + this.posterPath;
         },
 
@@ -73,8 +70,7 @@ export default {
     <div class="media-card">
 
         <!-- Poster -->
-        <img v-if="hasPoster" :src="posterFullPath" :alt="title" class="media-poster">
-        <img v-else src="@/assets/img/media-placeholder.png" :alt="title" class="media-poster">
+        <img :src="posterFullPath" :alt="title" class="media-poster">
 
         <!-- Media Info -->
         <div class="media-info">
