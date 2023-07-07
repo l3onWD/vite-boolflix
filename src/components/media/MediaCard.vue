@@ -33,9 +33,10 @@ export default {
             return this.posterPath;
         },
 
-        posterfullPosterPath() {
+        posterFullPath() {
+            if (!this.posterPath) return null;
             const { posterBasePath, posterSize } = mediaSettings
-            return posterBasePath + posterSize + this.posterPath;;
+            return posterBasePath + posterSize + this.posterPath;
         },
 
         mediaVote() {
@@ -56,6 +57,12 @@ export default {
 
             return genreNames.join(', ');
         }
+    },
+
+    methods: {
+        getIconClass(n) {
+            return n <= this.mediaVote ? 'fas' : 'far';
+        }
     }
 
 }
@@ -66,10 +73,8 @@ export default {
     <div class="media-card">
 
         <!-- Poster -->
-        <img v-if="hasPoster" :src="posterfullPosterPath" :alt="title" class="media-poster">
-        <div v-else class="media-poster-none">
-            <h3>Nessuna Immagine</h3>
-        </div>
+        <img v-if="hasPoster" :src="posterFullPath" :alt="title" class="media-poster">
+        <img v-else src="@/assets/img/media-placeholder.png" :alt="title" class="media-poster">
 
         <!-- Media Info -->
         <div class="media-info">
@@ -90,10 +95,7 @@ export default {
 
             <!-- Vote Stars -->
             <div class="py-2">
-                <i v-for="n in 5" :key="n">
-                    <FontAwesomeIcon v-if="n <= mediaVote" icon="fas fa-star" />
-                    <FontAwesomeIcon v-else icon="far fa-star" />
-                </i>
+                <FontAwesomeIcon v-for="n in 5" :key="n" :icon="[getIconClass(n), 'star']" />
             </div>
 
             <!-- Cast -->
@@ -130,17 +132,6 @@ export default {
         height: 100%;
 
         object-fit: cover;
-    }
-
-    .media-poster-none {
-        height: 100%;
-
-        display: flex;
-        background-color: $col-gray;
-
-        &>* {
-            margin: auto;
-        }
     }
 
     .media-info {
