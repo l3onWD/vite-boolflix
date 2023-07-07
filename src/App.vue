@@ -27,7 +27,9 @@ export default {
                 params: {
                     api_key: api.key,
                     language: api.language,
-                    query: store.filters.title
+                    query: store.filters.title,
+                    primary_release_year: store.filters.year,
+                    first_air_date_year: store.filters.year
                 }
             };
         }
