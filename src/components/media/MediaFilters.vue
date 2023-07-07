@@ -57,10 +57,9 @@ export default {
         <BaseSidecanvas :isActive="filtersAreVisible" title="Filtri" position="right"
             @canvas-closed="filtersAreVisible = false">
 
-            <ul class="d-md-flex">
-
+            <ul>
                 <!-- Genres Filter -->
-                <li>
+                <li class="py-1">
                     <BaseSelectInput defaultLabel="Tutti i generi" :options="genreSelectOptions"
                         @select-changed="onGenresFilterChanged" />
                 </li>
