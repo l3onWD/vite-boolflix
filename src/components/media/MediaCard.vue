@@ -3,23 +3,50 @@
 * RESOURCES
 -------------------------------------------*/
 /*** DATA ***/
-import { mediaSettings } from '@/data/';
+import axios from 'axios';
+import { api, mediaSettings } from '@/data/';
 import { store } from '@/data/store';
 
 
 export default {
+    data() {
+        return {
+            cast: []
+        };
+    },
+
     props: {
         id: Number,
+        type: String,
         title: String,
         originalTitle: String,
         originalLanguage: String,
         voteAverage: Number,
         posterPath: String,
-        cast: Array,
-        genreIds: Array
+        genreIds: Array,
     },
 
     computed: {
+        /*
+        * FETCHING
+        */
+        apiConfig() {
+            return {
+                params: {
+                    api_key: api.key,
+                    language: api.language,
+                }
+            };
+        },
+
+        mediaEndpoint() {
+            return this.type === 'movies' ? `movie/${this.id}/credits` : `tv/${this.id}/credits`;
+        },
+
+
+        /*
+        * MISC
+        */
         hasFlag() {
             return mediaSettings.languageFlags.includes(this.originalLanguage);
         },
@@ -57,9 +84,36 @@ export default {
     },
 
     methods: {
+        /*
+        * FETCHING
+        */
+        // Fetch a list of 5 cast actors
+        fetchMediaCast(endpoint) {
+
+            //this.loaders++;
+
+            axios.get(api.uri + endpoint, this.apiConfig)
+                .then(({ data }) => {
+
+                    this.cast = data.cast.slice(0, 5).map(actor => actor.name);
+
+                })
+                .catch(err => console.error(err))
+                .then(() => {
+                    //this.loaders--;
+                });
+
+        },
+
+
         getIconClass(n) {
             return n <= this.mediaVote ? 'fas' : 'far';
         }
+    },
+
+
+    created() {
+        this.fetchMediaCast(this.mediaEndpoint);
     }
 
 }

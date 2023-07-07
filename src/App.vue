@@ -49,6 +49,7 @@ export default {
                         // Expected properties (API dependent)
                         const { id, title, original_title, name, original_name, original_language, vote_average, poster_path, genre_ids } = item;
 
+
                         return {
                             id,
                             title: title || name,
@@ -58,8 +59,7 @@ export default {
                             posterPath: poster_path,
                             genreIds: genre_ids,
 
-                            // Create properties for next api calls
-                            cast: []
+                            type: media
                         };
 
                     });
@@ -69,35 +69,7 @@ export default {
                 .then(() => {
 
                     this.loaders--;
-
-                    this.fetchMediaCast(media);
                 });
-        },
-
-        // Fetch a list of 5 cast actors for all items in a media array
-        fetchMediaCast(media) {
-            store[media].forEach((item, i) => {
-
-                // Get endpoint based on media fetched
-                const creditsEndpoint = media === 'movies' ? `movie/${item.id}/credits` : `tv/${item.id}/credits`;
-
-                // Fetch cast
-                this.loaders++;
-
-                axios.get(api.uri + creditsEndpoint, this.apiConfig)
-                    .then(({ data }) => {
-
-                        const castList = data.cast.slice(0, 5).map(actor => actor.name);
-
-                        store[media][i].cast = castList;
-
-                    })
-                    .catch(err => console.error(err))
-                    .then(() => {
-                        this.loaders--;
-                    });
-
-            });
         },
 
         // Fetch all unique genres from movies and series media
