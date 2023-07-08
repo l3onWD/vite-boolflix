@@ -5,7 +5,6 @@
 /*** COMPONENTS ***/
 import BaseSelectInput from '@/components/base/BaseSelectInput.vue';
 import BaseSidecanvas from '@/components/base/BaseSidecanvas.vue';
-import BaseNumberInput from '@/components/base/BaseNumberInput.vue';
 
 /*** DATA ***/
 import { filtersSettings } from '@/data/';
@@ -14,21 +13,18 @@ import { store } from '@/data/store';
 
 
 export default {
-    components: { BaseSelectInput, BaseSidecanvas, BaseNumberInput },
+    components: { BaseSelectInput, BaseSidecanvas },
 
     data() {
         return {
             filtersAreVisible: false,
-            voteFilterOptions: filtersSettings.voteOptions
+            voteSelectOptions: filtersSettings.voteOptions,
+            yearSelectOptions: filtersSettings.yearOptions
         };
     },
 
     computed: {
         genreSelectOptions() {
-            return store.genres.map(({ id, name }) => ({ value: id, text: name }));
-        },
-
-        yearSelectOptions() {
             return store.genres.map(({ id, name }) => ({ value: id, text: name }));
         },
 
@@ -89,13 +85,13 @@ export default {
                     <!-- Vote Filter (Client Side) -->
                     <li>
                         <h5 class="mb-3">Voto</h5>
-                        <BaseSelectInput :options="voteFilterOptions" @select-changed="onVoteFilterChanged" />
+                        <BaseSelectInput :options="voteSelectOptions" @select-changed="onVoteFilterChanged" />
                     </li>
 
                     <!-- Release Year Filter (Server Side) -->
                     <li>
                         <h5 class="mb-3">Anno di Uscita</h5>
-                        <BaseNumberInput :min-value="1950" :max-value="2023" @value-changed="onYearFilterChanged" />
+                        <BaseSelectInput :options="yearSelectOptions" @select-changed="onYearFilterChanged" />
                     </li>
 
                 </ul>

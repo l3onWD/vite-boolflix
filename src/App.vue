@@ -21,6 +21,7 @@ export default {
             loaders: 0
         };
     },
+
     computed: {
         apiConfig() {
             return {
