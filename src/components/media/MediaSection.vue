@@ -21,10 +21,19 @@ export default {
 
         filteredMedia() {
 
+            // Client side filtering
             const genreFilter = store.filters.genreId;
+            const voteFilter = (store.filters.vote - 1) * 2;// From 0 to 8
 
-            if (!genreFilter) return store[this.mediaType];
-            return store[this.mediaType].filter(media => media.genreIds.includes(genreFilter));
+            if (!genreFilter && !voteFilter) return store[this.mediaType];
+            return store[this.mediaType].filter(media => {
+
+                const hasGenre = !genreFilter || media.genreIds.includes(genreFilter);
+                const hasVote = media.voteAverage >= voteFilter;
+
+                return hasGenre && hasVote;
+
+            });
         }
     }
 

@@ -42,7 +42,7 @@ export default {
             <!-- Title -->
             <h1 class="mb-0">BoolFlix</h1>
 
-            <!-- Media Title Filter -->
+            <!-- Media Title Filter (Server Side) -->
             <BaseSearchForm placeholder="Cerca per nome..." @term-changed="onTitleFilterChanged"
                 @form-submit="onTitleFilterSubmit" />
 

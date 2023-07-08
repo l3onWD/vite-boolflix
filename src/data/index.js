@@ -11,5 +11,15 @@ const mediaSettings = {
     languageFlags: ['it', 'en']
 }
 
+const filtersSettings = {
+    voteOptions: [
+        { value: 1, text: '&starf;' },
+        { value: 2, text: '&starf;&starf;' },
+        { value: 3, text: '&starf;&starf;&starf;' },
+        { value: 4, text: '&starf;&starf;&starf;&starf;' },
+        { value: 5, text: '&starf;&starf;&starf;&starf;&starf;' }
+    ]
+}
 
-export { api, mediaSettings };
+
+export { api, mediaSettings, filtersSettings };

@@ -8,7 +8,9 @@ import BaseSidecanvas from '@/components/base/BaseSidecanvas.vue';
 import BaseNumberInput from '@/components/base/BaseNumberInput.vue';
 
 /*** DATA ***/
+import { filtersSettings } from '@/data/';
 import { store } from '@/data/store';
+
 
 
 export default {
@@ -16,7 +18,8 @@ export default {
 
     data() {
         return {
-            filtersAreVisible: false
+            filtersAreVisible: false,
+            voteFilterOptions: filtersSettings.voteOptions
         };
     },
 
@@ -30,7 +33,7 @@ export default {
         },
 
         isFilterSelected() {
-            return store.filters.genreId || store.filters.year;
+            return store.filters.genreId || store.filters.year || store.filters.vote;
         }
     },
 
@@ -43,6 +46,12 @@ export default {
 
         onYearFilterChanged(year) {
             store.filters.year = year;
+
+            this.$emit('filter-submit');
+        },
+
+        onVoteFilterChanged(vote) {
+            store.filters.vote = vote;
 
             this.$emit('filter-submit');
         }
@@ -67,22 +76,30 @@ export default {
         <BaseSidecanvas :isActive="filtersAreVisible" title="Filtri" position="right"
             @canvas-closed="filtersAreVisible = false">
 
-            <ul class="filter-list">
+            <form>
 
-                <!-- Genres Filter -->
-                <li>
-                    <h5 class="mb-3">Generi</h5>
-                    <BaseSelectInput defaultLabel="Tutti" :options="genreSelectOptions"
-                        @select-changed="onGenresFilterChanged" />
-                </li>
+                <ul class="filter-list">
 
-                <!-- Release Year Filter -->
-                <li>
-                    <h5 class="mb-3">Anno di Uscita</h5>
-                    <BaseNumberInput :min-value="1950" :max-value="2023" @value-changed="onYearFilterChanged" />
-                </li>
+                    <!-- Genres Filter (Client Side) -->
+                    <li>
+                        <h5 class="mb-3">Generi</h5>
+                        <BaseSelectInput :options="genreSelectOptions" @select-changed="onGenresFilterChanged" />
+                    </li>
 
-            </ul>
+                    <!-- Vote Filter (Client Side) -->
+                    <li>
+                        <h5 class="mb-3">Voto</h5>
+                        <BaseSelectInput :options="voteFilterOptions" @select-changed="onVoteFilterChanged" />
+                    </li>
+
+                    <!-- Release Year Filter (Server Side) -->
+                    <li>
+                        <h5 class="mb-3">Anno di Uscita</h5>
+                        <BaseNumberInput :min-value="1950" :max-value="2023" @value-changed="onYearFilterChanged" />
+                    </li>
+
+                </ul>
+            </form>
 
         </BaseSidecanvas>
 
