@@ -7,7 +7,7 @@ export default {
     },
 
     props: {
-        defaultLabel: '',
+        defaultLabel: String,
         options: Array
     },
 
@@ -19,7 +19,7 @@ export default {
 
 <template>
     <select v-model="selectedValue" @change="$emit('select-changed', selectedValue)" class="form-select w-auto">
-        <option value="">{{ defaultLabel || 'Tutto' }}</option>
-        <option v-for="option in options" :key="option.value" :value="option.value">{{ option.text }}</option>
+        <option value="">{{ defaultLabel || 'Tutti' }}</option>
+        <option v-for="option in options" :key="option.value" :value="option.value" v-html="option.text"></option>
     </select>
 </template>
