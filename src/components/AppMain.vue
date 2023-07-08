@@ -13,11 +13,7 @@ import { store } from '@/data/store';// TODO eliminare la dipendenza da store e 
 export default {
     components: { MediaSection, MediaFilters },
 
-    data() {
-        return {
-            store
-        };
-    },
+    data: () => store,
 
     emits: ['filter-submit']
 
@@ -28,24 +24,22 @@ export default {
 <template>
     <main>
 
-        <div class="container h-100 py-4">
+        <!-- Intro Screen -->
+        <div v-if="!movies.length && !series.length" class="h-100 d-flex">
+            <p class="m-auto">Cerca un film o una serie TV per iniziare.</p>
+        </div>
+
+        <!-- Search Screen -->
+        <div v-else class="container h-100 py-4">
 
             <!-- Filters -->
             <MediaFilters @filter-submit="this.$emit('filter-submit')" />
 
-            <!-- Intro Screen -->
-            <div v-if="!store.movies.length && !store.series.length" class="mt-5">
-                <p class="text-center">Cerca un film o una serie TV per iniziare.</p>
-            </div>
+            <!-- Media Sections -->
+            <MediaSection title="Film" media-type="movies" />
 
-            <!-- Media Lists -->
-            <div v-else>
+            <MediaSection title="Serie" media-type="series" />
 
-                <MediaSection title="Film" media-type="movies" />
-
-                <MediaSection title="Serie" media-type="series" />
-
-            </div>
         </div>
 
     </main>
