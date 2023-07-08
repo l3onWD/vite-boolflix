@@ -71,7 +71,7 @@ export default {
 
         <!-- Filters Toggler -->
         <button @click="filtersAreVisible = !filtersAreVisible" class="btn btn-outline-light">
-            <FontAwesomeIcon icon="fas fa-sliders" size="lg" class="me-2" :class="{ 'text-success': isFilterSelected }" />
+            <FontAwesomeIcon icon="fas fa-sliders" size="lg" class="me-2" :class="{ 'text-danger': isFilterSelected }" />
             Filtri
         </button>
 
