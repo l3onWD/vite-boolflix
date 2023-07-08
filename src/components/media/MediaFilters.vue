@@ -50,6 +50,13 @@ export default {
             store.filters.vote = vote;
 
             this.$emit('filter-submit');
+        },
+
+        resetFilters() {
+            store.filters.genreId = '';
+            store.filters.year = '';
+            store.filters.vote = '';
+            this.$emit('filter-submit');
         }
     },
 
@@ -76,20 +83,25 @@ export default {
 
                 <ul class="filter-list">
 
-                    <!-- Genres Filter (Client Side) -->
+                    <!-- Reset Filters -->
                     <li>
+                        <button @click="resetFilters" class="btn btn-link" type="reset">Resetta filtri</button>
+                    </li>
+
+                    <!-- Genres Filter (Client Side) -->
+                    <li class="py-2">
                         <h5 class="mb-3">Generi</h5>
                         <BaseSelectInput :options="genreSelectOptions" @select-changed="onGenresFilterChanged" />
                     </li>
 
                     <!-- Vote Filter (Client Side) -->
-                    <li>
+                    <li class="py-2">
                         <h5 class="mb-3">Voto</h5>
                         <BaseSelectInput :options="voteSelectOptions" @select-changed="onVoteFilterChanged" />
                     </li>
 
                     <!-- Release Year Filter (Server Side) -->
-                    <li>
+                    <li class="py-2">
                         <h5 class="mb-3">Anno di Uscita</h5>
                         <BaseSelectInput :options="yearSelectOptions" @select-changed="onYearFilterChanged" />
                     </li>
@@ -106,10 +118,19 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/vars' as *;
 
-.filter-list>li {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+.filter-list {
 
-    border-top: 1px solid $col-gray;
+    li {
+        border-top: 1px solid $col-gray;
+    }
+
+    .btn-link {
+        width: 100%;
+        padding-left: 0;
+
+        color: $col-red;
+        text-align: start;
+        text-decoration: none;
+    }
 }
 </style>
