@@ -131,6 +131,10 @@ export default {
         color: $col-red;
         text-align: start;
         text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 </style>

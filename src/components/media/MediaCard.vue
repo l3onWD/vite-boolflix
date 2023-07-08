@@ -137,43 +137,49 @@ export default {
         <!-- Poster -->
         <img :src="posterFullPath" :alt="title" class="media-poster">
 
-        <!-- Media Info -->
-        <div class="media-info">
+        <!-- Media Info Container (needed for visibility animation) -->
+        <div class="media-info-container">
 
-            <!-- Title -->
-            <h3>{{ title }}</h3>
-            <p>({{ originalTitle }})</p>
+            <!-- Media Info -->
+            <ul class="media-info">
 
-            <!-- Generes -->
-            <div class="py-2">
-                <h5 class="mb-0">Generi</h5>
-                <p>{{ genresList }}</p>
-            </div>
+                <!-- Title -->
+                <li class="mb-3">
+                    <h6>{{ title }}</h6>
+                    <p class="text-lightgray mb-0">({{ originalTitle }})</p>
+                </li>
 
-            <!-- Release Year -->
-            <h5 class="mb-0">Anno</h5>
-            <p>{{ releaseYear }}</p>
+                <!-- Vote Language and Year -->
+                <li class="text-lightgray mb-3">
+                    <ul class="media-info-list">
+                        <li>
+                            <FontAwesomeIcon v-for="n in 5" :key="n" :icon="[getIconClass(n), 'star']" />
+                        </li>
 
-            <!-- Language flag -->
-            <div class="py-2">
-                <h5 class="mb-2">Lingua Originale</h5>
-                <img v-if="hasFlag" :src="flagPath" :alt="originalLanguage" class="media-language">
-                <p v-else>[{{ originalLanguage }}]</p>
-            </div>
+                        <li>
+                            <span>{{ releaseYear }}</span>
+                        </li>
 
-            <!-- Vote Stars -->
-            <div class="py-2">
-                <h5 class="mb-0">Voto</h5>
-                <FontAwesomeIcon v-for="n in 5" :key="n" :icon="[getIconClass(n), 'star']" />
-            </div>
+                        <li>
+                            <img v-if="hasFlag" :src="flagPath" :alt="originalLanguage" class="media-language">
+                            <span v-else>[{{ originalLanguage }}]</span>
+                        </li>
 
-            <!-- Cast -->
-            <div class="py-2">
-                <h5 class="mb-0">Cast</h5>
-                <p>{{ castList }}...</p>
-            </div>
+                    </ul>
+                </li>
 
+                <!-- Generes -->
+                <li class="mb-3">
+                    <p class="mb-0">{{ genresList }}</p>
+                </li>
 
+                <!-- Cast -->
+                <li class="text-lightgray">
+                    <h6 class="mb-0">Cast</h6>
+                    <p class="mb-0">{{ castList }}...</p>
+                </li>
+
+            </ul>
         </div>
 
         <AppLoader v-if="loaders" />
@@ -189,40 +195,64 @@ export default {
 
 .media-card {
     height: 100%;
-    min-height: 300px;
     position: relative;
 
-    border-radius: 0.5rem;
-    text-align: center;
+    font-size: 0.8rem;
 
-    overflow: hidden;
     box-shadow: 0 0 8px 2px rgba($color: #000, $alpha: 0.5);
+    cursor: pointer;
 
     .media-poster {
         width: 100%;
         height: 100%;
 
+        border-radius: 0.5rem;
         object-fit: cover;
     }
 
-    .media-info {
-        padding: 1rem;
+    .media-info-container {
         position: absolute;
-        inset: 0;
+        top: 50%;
 
+        visibility: hidden;
+        z-index: 1;
+        transition: visibility 0.2s;
+    }
+
+    &:hover .media-info-container {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .media-info {
+        padding: 0.25rem 1rem;
+
+        background-color: #000;
+        border-radius: 0.5rem;
         opacity: 0;
-        background-color: rgba($color: #000, $alpha: 0.9);
 
-        transition: opacity 0.5s;
-        overflow-y: auto;
+        transform: scale(1);
+        transition: transform 0.2s, opacity 0.2s;
+    }
 
-        &:hover {
+    &:hover {
+
+        .media-info {
             opacity: 1;
+            transform: scale(1.1);
+
+            transition: transform 0.2s 0.25s, opacity 0.2s 0.25s;
         }
     }
 
+    .media-info-list {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
     .media-language {
-        width: 50px;
+        width: 30px;
     }
 }
 </style>
