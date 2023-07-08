@@ -23,7 +23,7 @@ export default {
 
             // Client side filtering
             const genreFilter = store.filters.genreId;
-            const voteFilter = (store.filters.vote - 1) * 2;// From 0 to 8
+            const voteFilter = store.filters.vote ? (parseInt(store.filters.vote) - 1) * 2 : 0;// From 0 to 8
 
             if (!genreFilter && !voteFilter) return store[this.mediaType];
             return store[this.mediaType].filter(media => {
