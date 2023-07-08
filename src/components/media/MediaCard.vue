@@ -90,6 +90,7 @@ export default {
         },
 
         releaseYear() {
+            if (!this.releaseDate) return '-';
             return new Date(this.releaseDate).getFullYear();
         }
     },
@@ -195,6 +196,7 @@ export default {
 
 .media-card {
     height: 100%;
+    min-height: 250px;
     position: relative;
 
     font-size: 0.8rem;
