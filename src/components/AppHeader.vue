@@ -40,7 +40,10 @@ export default {
         <div class="container h-100 d-flex justify-content-between align-items-center">
 
             <!-- Title -->
-            <h1 class="mb-0">BoolFlix</h1>
+            <h1 class="mb-0 me-2">
+                <span class="d-sm-none display-1 fw-bold">[BF]</span>
+                <span class="d-none d-sm-inline">BoolFlix</span>
+            </h1>
 
             <!-- Media Title Filter (Server Side) -->
             <BaseSearchForm placeholder="Cerca per nome..." @term-changed="onTitleFilterChanged"
