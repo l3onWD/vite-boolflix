@@ -215,6 +215,7 @@ export default {
     .media-info-container {
         position: absolute;
         top: 50%;
+        width: 100%;
 
         visibility: hidden;
         z-index: 1;
