@@ -17,7 +17,7 @@ let years = [];
 const minYear = 1950;
 const maxYear = new Date().getFullYear();
 
-for (let i = minYear; i <= maxYear; i++) {
+for (let i = maxYear; i >= minYear; i--) {
     years.push({ value: i, text: i });
 }
 
