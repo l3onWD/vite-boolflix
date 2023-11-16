@@ -1,5 +1,5 @@
 const api = {
-    key: 'd3a65bacb8cd5d801f89b557096b67e3',
+    key: import.meta.env.VITE_TMDB_API_KEY,
     uri: 'https://api.themoviedb.org/3/',
     language: 'it-IT'
 }
